@@ -36,6 +36,20 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Endpoint to fetch user details by email
+router.get('/email/:email', async (req, res) => {
+    const { email } = req.params;
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).send({ message: 'User not found' });
+        }
+        res.status(200).send(user);
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+});
+
 module.exports = router;
 
 
