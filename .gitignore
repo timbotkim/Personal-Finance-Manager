@@ -1,2 +1,9 @@
-node_modules
+# Ignore environment variables file
 .env
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore other node modules and logs
+node_modules
+npm-debug.log

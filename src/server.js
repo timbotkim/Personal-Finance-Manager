@@ -2,6 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 const app = express();
 const auth = require('./middleware/auth');  // Import the auth middleware
 
@@ -9,8 +13,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB connection
-const uri = 'mongodb+srv://tim24kim:Iwant2database!@finance-backend-dev.zvsixmc.mongodb.net/?retryWrites=true&w=majority&appName=Finance-Backend-Dev';
-mongoose.connect(uri)
+const uri = process.env.MONGODB_URI;
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected...'))
   .catch(err => console.log(err));
 
